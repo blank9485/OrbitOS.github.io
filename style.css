@@ -1,0 +1,53 @@
+body {
+    font-family: 'Roboto', sans-serif; 
+    background: #f0f0f0;
+    color: #333;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+#terminal {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Added back the box shadow */
+    width: 90%;
+    max-width: 350px;
+}
+
+#output {
+    white-space: pre-wrap;
+    font-size: 0.9rem;
+    overflow: hidden; /* Hide the text initially */
+    border-right: 0.15em solid transparent; /* Add a blinking cursor */
+    /* Add the typing animation using CSS */
+    animation: 
+        typing 2s steps(40, end) forwards, /* Step-based typing animation */
+        blink-caret 0.75s step-end infinite; /* Blinking cursor animation */
+}
+
+/* Keyframes for typing animation */
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+}
+
+/* Keyframes for blinking cursor animation */
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: #333 }
+}
+
+
+#input {
+    width: 100%;
+    background: none;
+    border: none;
+    color: #333;
+    font-size: 0.9rem;
+    padding: 0.25rem;
+}
+      
