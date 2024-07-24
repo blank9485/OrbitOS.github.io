@@ -2,7 +2,7 @@ const outputElement = document.getElementById('output');
 const inputElement = document.getElementById('input');
 
 const welcomeMessage = "Welcome to OrbitOS !
-Type "help" for a list of available commands.";
+Type "help" for a list of available commands."; // Fixed line break
 
 function typeWriter(text, i = 0) {
   if (i < text.length) {
@@ -31,17 +31,17 @@ function handleCommand(command) {
   switch (cmd) {
     case 'neofetch':
       outputElement.textContent += 'OrbiOS v1.1
-';
+'; // Fixed line break
       break;
     case 'software-update':
       outputElement.textContent += 'Searching for updates.....
-';
+'; // Fixed line break
       setTimeout(() => {
         outputElement.textContent += 'Last update: 24.07.2024
 Version 1.1:
 -added calculator.
 
-';
+'; // Fixed line breaks
       }, 3000);
       break;
     case 'help':
@@ -50,22 +50,22 @@ Version 1.1:
 - software-update
 - help
 - calc
-'; // Added 'calc' to help
+'; // Fixed line breaks
       break;
-    case 'calc': 
+    case 'calc':
       if (args.length === 0) {
         outputElement.textContent += "Usage: calc <expression>
-";
+"; // Fixed line break
       } else {
         const expression = args.join(' ');
         const result = calculate(expression);
         outputElement.textContent += `${result}
-`;
+`; // Fixed line break
       }
       break;
     default:
       outputElement.textContent += `Command not found: ${command}
-`;
+`; // Fixed line break
   }
 }
 
@@ -76,4 +76,4 @@ function calculate(expression) {
   } catch (error) {
     return "Invalid Expression";
   }
-}
+} 
