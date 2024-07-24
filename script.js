@@ -33,7 +33,7 @@ function handleCommand(command) {
         case 'software-update':
             outputElement.textContent += 'Searching for updates.....\n';
             setTimeout(() => {
-                outputElement.textContent += 'Last update: 19.07.2024\nVersion 1.0:\nNo updates found.\n\n';
+                outputElement.textContent += 'Last update: 24.07.2024\nVersion 1.1:\n-added calc command.\n\n';
             }, 3000);
             break;
         case 'help':
