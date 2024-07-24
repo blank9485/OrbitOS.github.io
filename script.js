@@ -28,7 +28,7 @@ inputElement.addEventListener('keydown', (event) => {
 function handleCommand(command) {
     switch (command) {
         case 'neofetch':
-            outputElement.textContent += 'OrbiOS v1.1\n';
+            outputElement.textContent += 'OrbitOS v1.1\n';
             break;
         case 'software-update':
             outputElement.textContent += 'Searching for updates.....\n';
