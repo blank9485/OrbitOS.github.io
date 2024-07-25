@@ -4,6 +4,7 @@ body {
     color: #333;
     margin: 0;
     display: flex;
+    flex-direction: column;
     height: 100vh;
 }
 
@@ -16,25 +17,14 @@ body {
 }
 
 #output {
-    white-space: pre-wrap;
-    font-size: 0.9rem;
-    overflow: auto;
-    height: calc(100% - 80px);
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 10px;
+    /* ... */
 }
 
 #input {
-    width: 100%;
-    background: none;
-    border: none;
-    color: #333;
-    font-size: 0.9rem;
-    padding: 0.25rem;
+    /* ... */
 }
 
 #sidebar {
-    flex: 0.3;
     background: rgba(255, 255, 255, 0.8);
     padding: 20px;
     border-radius: 10px;
