@@ -29,11 +29,14 @@ function handleCommand(command) {
     switch (command) {
         case 'neofetch':
             outputElement.textContent += 'OrbitOS v1.2\n';
+            outputElement.textContent += 'Kernel: GeminiKernel 5.0.0-mvm\n';
+            outputElement.textContent += 'OS type: Linux\n';
+            outputElement.textContent += 'Host: localhost\n';
             break;
         case 'software-update':
             outputElement.textContent += 'Searching for updates.....\n';
             setTimeout(() => {
-                outputElement.textContent += 'Last update: 25.07.2024\nVersion 1.2:\n-added clear, ls, time and date.\n\n';
+                outputElement.textContent += 'Last update: 25.07.2024\nVersion 1.2:\n-added clear, ls, time and date. - added more info at neofetch command\n\n';
             }, 3000);
             break;
         case 'help':
