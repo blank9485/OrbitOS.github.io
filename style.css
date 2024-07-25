@@ -1,32 +1,26 @@
 body {
-    font-family: 'Roboto', sans-serif; 
-    background: #f0f0f0;
-    color: #333;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
+  font-family: 'Roboto', sans-serif;
+  background: #282c34; /* Dark background */
+  color: #fff; /* White text */
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 #terminal {
-    flex: 1;
-    background: rgba(255, 255, 255, 0.8);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background: #303438; /* Slightly lighter terminal background */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); /* Darker shadow */
+  width: 80%; /* Adjust width as needed */
 }
 
 #output {
-    /* ... */
+  /* ... */
 }
 
 #input {
-    /* ... */
-}
-
-#sidebar {
-    background: rgba(255, 255, 255, 0.8);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  /* ... */
 }
