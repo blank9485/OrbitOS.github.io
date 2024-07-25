@@ -1,7 +1,7 @@
 const outputElement = document.getElementById('output');
 const inputElement = document.getElementById('input');
 
-const welcomeMessage = "Welcome to OrbitOS!\nType \"help\" for a list of available commands.";
+const welcomeMessage = "Welcome to OrbitOS Alpha!\nType \"help\" for a list of available commands.";
 
 function typeWriter(text, i = 0) {
     if (i < text.length) {
