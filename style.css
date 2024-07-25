@@ -3,44 +3,33 @@ body {
     background: #f0f0f0;
     color: #333;
     margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr;
+    gap: 20px;
+    padding: 20px;
 }
 
-#terminal {
+.card {
     background: rgba(255, 255, 255, 0.8);
-    padding: 1rem;
-    border-radius: 0.5rem;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Added back the box shadow */
-    width: 90%;
-    max-width: 350px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#terminal-card {
+    grid-column: 1 / span 2;
+    grid-row: 1;
 }
 
 #output {
     white-space: pre-wrap;
     font-size: 0.9rem;
-    overflow: hidden; /* Hide the text initially */
-    border-right: 0.15em solid transparent; /* Add a blinking cursor */
-    /* Add the typing animation using CSS */
-    animation: 
-        typing 2s steps(40, end) forwards, /* Step-based typing animation */
-        blink-caret 0.75s step-end infinite; /* Blinking cursor animation */
+    overflow: auto;
+    height: calc(100% - 40px);
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
 }
-
-/* Keyframes for typing animation */
-@keyframes typing {
-    from { width: 0 }
-    to { width: 100% }
-}
-
-/* Keyframes for blinking cursor animation */
-@keyframes blink-caret {
-    from, to { border-color: transparent }
-    50% { border-color: #333 }
-}
-
 
 #input {
     width: 100%;
@@ -50,4 +39,19 @@ body {
     font-size: 0.9rem;
     padding: 0.25rem;
 }
-      
+
+#other-card {
+    /* Add content and styling here */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#another-card {
+    /* Add content and styling here */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
