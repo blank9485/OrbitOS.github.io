@@ -37,7 +37,23 @@ function handleCommand(command) {
             }, 3000);
             break;
         case 'help':
-            outputElement.textContent += 'Available commands:\n- neofetch\n- software-update\n- calc <expression>\n- help\n';
+            outputElement.textContent += 'Available commands:\n- neofetch\n- software-update\n- calc <expression>\n- help\n- date\n- time\n- clear\n- ls\n';
+            break;
+        case 'date':
+            const currentDate = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            outputElement.textContent += currentDate.toLocaleDateString('en-US', options) + '\n';
+            break;
+        case 'time':
+            const currentTime = new Date();
+            const timeOptions = { hour: 'numeric', minute: 'numeric', second: 'numeric' };
+            outputElement.textContent += currentTime.toLocaleTimeString('en-US', timeOptions) + '\n';
+            break;
+        case 'clear':
+            outputElement.textContent = '';
+            break;
+        case 'ls':
+            outputElement.textContent += 'documents downloads music pictures public videos\n';
             break;
         default:
             if (command.startsWith('calc ')) {
