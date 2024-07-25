@@ -28,12 +28,12 @@ inputElement.addEventListener('keydown', (event) => {
 function handleCommand(command) {
     switch (command) {
         case 'neofetch':
-            outputElement.textContent += 'OrbitOS v1.1\n';
+            outputElement.textContent += 'OrbitOS v1.2\n';
             break;
         case 'software-update':
             outputElement.textContent += 'Searching for updates.....\n';
             setTimeout(() => {
-                outputElement.textContent += 'Last update: 24.07.2024\nVersion 1.1:\n-added calc command.\n\n';
+                outputElement.textContent += 'Last update: 25.07.2024\nVersion 1.2:\n-added clear, ls, time and date.\n\n';
             }, 3000);
             break;
         case 'help':
