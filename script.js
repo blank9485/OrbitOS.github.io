@@ -4,108 +4,83 @@ const inputElement = document.getElementById('input');
 const welcomeMessage = "Welcome to OrbitOS Alpha!\nType \"help\" for a list of available commands.";
 
 function typeWriter(text, i = 0) {
-    if (i < text.length) {
-        outputElement.textContent += text.charAt(i);
-        i++;
-        setTimeout(() => typeWriter(text, i), 50);
-    } else {
-        inputElement.focus();
-    }
+  if (i < text.length) {
+    outputElement.textContent += text.charAt(i);
+    i++;
+    setTimeout(() => typeWriter(text, i), 50);
+  } else {
+    inputElement.focus();
+  }
 }
 
 window.addEventListener('load', () => {
-    typeWriter(welcomeMessage);
+  typeWriter(welcomeMessage);
 });
 
 inputElement.addEventListener('keydown', (event) => {
-    if (event.key === 'Enter') {
-        const command = inputElement.value.trim();
-        handleCommand(command);
-        inputElement.value = '';
-    }
+  if (event.key === 'Enter') {
+    const command = inputElement.value.trim();
+    handleCommand(command);
+    inputElement.value = '';
+  }
 });
 
 function handleCommand(command) {
-    switch (command) {
-        case 'neofetch':
-            outputElement.textContent += 'OrbitOS v1.3\n';
-            outputElement.textContent += 'Kernel: GeminiKernel 5.0.0-mvm\n';
-            outputElement.textContent += 'OS type: Linux\n';
-            outputElement.textContent += 'Host: localhost\n';
-            outputElement.textContent += 'CPU: Intel Core i7-12700H\n';
-            outputElement.textContent += 'Memory: 16GB DDR5\n';
-            outputElement.textContent += 'Disk: 512GB SSD\n';
-            break;
-        case 'software-update':
-            outputElement.textContent += 'Searching for updates.....\n';
-            setTimeout(() => {
-                outputElement.textContent += 'Last update: 06.08.2024\nVersion 1.3:\n-added more commands, updated neofetch\n\n';
-            }, 3000);
-            break;
-        case 'help':
-            outputElement.textContent += 'Available commands:\n';
-            outputElement.textContent += '- neofetch\n';
-            outputElement.textContent += '- software-update\n';
-            outputElement.textContent += '- calc <expression>\n';
-            outputElement.textContent += '- help\n';
-            outputElement.textContent += '- date\n';
-            outputElement.textContent += '- time\n';
-            outputElement.textContent += '- clear\n';
-            outputElement.textContent += '- ls\n';
-            outputElement.textContent += '- cd <directory>\n';
-            outputElement.textContent += '- mkdir <directory>\n';
-            outputElement.textContent += '- rm <file>\n';
-            outputElement.textContent += '- touch <file>\n';
-            outputElement.textContent += '- echo <text>\n';
-            break;
-        case 'date':
-            const currentDate = new Date();
-            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            outputElement.textContent += currentDate.toLocaleDateString('en-US', options) + '\n';
-            break;
-        case 'time':
-            const currentTime = new Date();
-            const timeOptions = { hour: 'numeric', minute: 'numeric', second: 'numeric' };
-            outputElement.textContent += currentTime.toLocaleTimeString('en-US', timeOptions) + '\n';
-            break;
-        case 'clear':
-            outputElement.textContent = '';
-            break;
-        case 'ls':
-            outputElement.textContent += 'documents downloads music pictures public videos\n';
-            break;
-        case 'cd':
-            // Implement directory navigation logic
-            outputElement.textContent += `cd: not implemented yet\n`;
-            break;
-        case 'mkdir':
-            // Implement directory creation logic
-            outputElement.textContent += `mkdir: not implemented yet\n`;
-            break;
-        case 'rm':
-            // Implement file deletion logic
-            outputElement.textContent += `rm: not implemented yet\n`;
-            break;
-        case 'touch':
-            // Implement file creation logic
-            outputElement.textContent += `touch: not implemented yet\n`;
-            break;
-        case 'echo':
-            // Implement echoing text to output
-            outputElement.textContent += command.substring(5) + '\n';
-            break;
-        default:
-            if (command.startsWith('calc ')) {
-                try {
-                    const expression = command.substring(5);
-                    const result = eval(expression);
-                    outputElement.textContent += `Result: ${result}\n`;
-                } catch (error) {
-                    outputElement.textContent += 'Invalid expression\n';
-                }
-            } else {
-                outputElement.textContent += `Command not found: ${command}\n`;
-            }
-            break;
-    }
+  switch (command) {
+    case 'neofetch':
+      outputElement.textContent += 'OrbitOS v1.2\n';
+      outputElement.textContent += 'Kernel: GeminiKernel 5.0.0-mvm\n';
+      outputElement.textContent += 'OS type: Linux\n';
+      outputElement.textContent += 'Host: localhost\n';
+      outputElement.textContent += 'Distro: OrbitOS\n'; // Added Distro information
+      outputElement.textContent += 'CPU: (4) x Intel Core i7-8700K @ 3.70GHz\n'; // Added CPU information
+      outputElement.textContent += 'Memory: 16GB\n'; // Added Memory information
+      outputElement.textContent += 'GPU: NVIDIA GeForce GTX 1080 Ti\n'; // Added GPU information
+      break;
+    case 'software-update':
+      outputElement.textContent += 'Searching for updates.....\n';
+      setTimeout(() => {
+        outputElement.textContent += 'Last update: 06.08.2024\nVersion 1.3:\n-added echo command and made some changes\n\n';
+      }, 3000);
+      break;
+    case 'help':
+      outputElement.textContent += 'Available commands:\n- neofetch\n- software-update\n- calc <expression>\n- help\n- date\n- time\n- clear\n- ls\n- echo <text>\n'; // Added echo command
+      break;
+    case 'date':
+      const currentDate = new Date();
+      const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      outputElement.textContent += currentDate.toLocaleDateString('en-US', options) + '\n';
+      break;
+    case 'time':
+      const currentTime = new Date();
+      const timeOptions = { hour: 'numeric', minute: 'numeric', second: 'numeric' };
+      outputElement.textContent += currentTime.toLocaleTimeString('en-US', timeOptions) + '\n';
+      break;
+    case 'clear':
+      outputElement.textContent = '';
+      break;
+    case 'ls':
+      outputElement.textContent += 'documents downloads music pictures public videos\n';
+      break;
+    case 'echo':
+      if (command.length > 4) {
+        outputElement.textContent += command.substring(5) + '\n';
+      } else {
+        outputElement.textContent += 'Usage: echo <text>\n';
+      }
+      break;
+    default:
+      if (command.startsWith('calc ')) {
+        try {
+          const expression = command.substring(5);
+          const result = eval(expression);
+          outputElement.textContent += `Result: ${result}\n`;
+        } catch (error) {
+          outputElement.textContent += 'Invalid expression\n';
+        }
+      } else {
+        outputElement.textContent += `Command not found: ${command}\n`;
+      }
+      break;
+  }
 }
