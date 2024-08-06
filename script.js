@@ -28,7 +28,7 @@ inputElement.addEventListener('keydown', (event) => {
 function handleCommand(command) {
   switch (command) {
     case 'neofetch':
-      outputElement.textContent += 'OrbitOS v1.2\n';
+      outputElement.textContent += 'OrbitOS v1.3\n';
       outputElement.textContent += 'Kernel: GeminiKernel 5.0.0-mvm\n';
       outputElement.textContent += 'OS type: Linux\n';
       outputElement.textContent += 'Host: localhost\n';
