@@ -29,27 +29,35 @@ function handleCommand(command) {
     switch (command) {
         case 'neofetch':
             outputElement.textContent += `
-            ░░░░░░░░░░░░░░░░░░░░
-            ░░░░░░░░░░░░░░░░░░░░   OrbitOS v1.3
-            ░░░░░░░░████░░░░░░░░   -------------
-            ░░░░░░░█░░░░█░░░░░░░   Kernel: GeminiKernel 5.0.0-mvm
-            ░░░░░░█░░░░░░█░░░░░░   OS Type: Linux
-            ░░░░░█░░░░░░░░█░░░░░   Host: localhost
-            ░░░░█░░░░░░░░░░█░░░░   Shell: GeminiShell v1.0
-            ░░░░█░░░░░░░░░░█░░░░   Resolution: 1920x1080
-            ░░░░█░░░░░░░░░░█░░░░   DE: OrbitDE
-            ░░░░░█░░░░░░░░█░░░░░   WM: OrbitWM
-            ░░░░░░█░░░░░░█░░░░░░   Terminal: OrbitTerm
-            ░░░░░░░█░░░░█░░░░░░░   CPU: OrbitCPU @ 3.5GHz
-            ░░░░░░░░████░░░░░░░░   Memory: 16384MB / 32768MB
-            ░░░░░░░░░░░░░░░░░░░░
-            ░░░░░░░░░░░░░░░░░░░░
-            \n`;
+OrbitOS v1.3
+-------------
+Kernel: GeminiKernel 5.0.0-mvm
+OS Type: Linux
+Host: localhost
+Shell: GeminiShell v1.0
+Resolution: 1920x1080
+DE: OrbitDE
+WM: OrbitWM
+Terminal: OrbitTerm
+CPU: OrbitCPU @ 3.5GHz
+Memory: 16384MB / 32768MB
+\n`;
             break;
         case 'software-update':
             outputElement.textContent += 'Searching for updates.....\n';
             setTimeout(() => {
-                outputElement.textContent += 'Last update: 06.08.2024\nVersion 1.3:\n-added neofetch and improved neofetch\n\n';
+                outputElement.textContent += `
+Last update: 06.08.2024
+Version 1.3:
+- Added echo command
+- Enhanced neofetch output
+- Improved software update functionality (beta)
+
+Updating system... Please wait.
+`;
+                setTimeout(() => {
+                    outputElement.textContent += 'Update complete. System is now up to date.\n';
+                }, 3000);
             }, 3000);
             break;
         case 'help':
