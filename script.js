@@ -7,7 +7,7 @@ function typeWriter(text, i = 0) {
     if (i < text.length) {
         outputElement.textContent += text.charAt(i);
         i++;
-        setTimeout(() => typeWriter(text, i), 50); 
+        setTimeout(() => typeWriter(text, i), 50);
     } else {
         inputElement.focus();
     }
@@ -28,19 +28,35 @@ inputElement.addEventListener('keydown', (event) => {
 function handleCommand(command) {
     switch (command) {
         case 'neofetch':
-            outputElement.textContent += 'OrbitOS v1.2\n';
+            outputElement.textContent += 'OrbitOS v1.3\n';
             outputElement.textContent += 'Kernel: GeminiKernel 5.0.0-mvm\n';
             outputElement.textContent += 'OS type: Linux\n';
             outputElement.textContent += 'Host: localhost\n';
+            outputElement.textContent += 'CPU: Intel Core i7-12700H\n';
+            outputElement.textContent += 'Memory: 16GB DDR5\n';
+            outputElement.textContent += 'Disk: 512GB SSD\n';
             break;
         case 'software-update':
             outputElement.textContent += 'Searching for updates.....\n';
             setTimeout(() => {
-                outputElement.textContent += 'Last update: 25.07.2024\nVersion 1.2:\n-added clear, ls, time and date. - added more info at neofetch command\n\n';
+                outputElement.textContent += 'Last update: 06.08.2024\nVersion 1.3:\n-added more commands, updated neofetch\n\n';
             }, 3000);
             break;
         case 'help':
-            outputElement.textContent += 'Available commands:\n- neofetch\n- software-update\n- calc <expression>\n- help\n- date\n- time\n- clear\n- ls\n';
+            outputElement.textContent += 'Available commands:\n';
+            outputElement.textContent += '- neofetch\n';
+            outputElement.textContent += '- software-update\n';
+            outputElement.textContent += '- calc <expression>\n';
+            outputElement.textContent += '- help\n';
+            outputElement.textContent += '- date\n';
+            outputElement.textContent += '- time\n';
+            outputElement.textContent += '- clear\n';
+            outputElement.textContent += '- ls\n';
+            outputElement.textContent += '- cd <directory>\n';
+            outputElement.textContent += '- mkdir <directory>\n';
+            outputElement.textContent += '- rm <file>\n';
+            outputElement.textContent += '- touch <file>\n';
+            outputElement.textContent += '- echo <text>\n';
             break;
         case 'date':
             const currentDate = new Date();
@@ -57,6 +73,26 @@ function handleCommand(command) {
             break;
         case 'ls':
             outputElement.textContent += 'documents downloads music pictures public videos\n';
+            break;
+        case 'cd':
+            // Implement directory navigation logic
+            outputElement.textContent += `cd: not implemented yet\n`;
+            break;
+        case 'mkdir':
+            // Implement directory creation logic
+            outputElement.textContent += `mkdir: not implemented yet\n`;
+            break;
+        case 'rm':
+            // Implement file deletion logic
+            outputElement.textContent += `rm: not implemented yet\n`;
+            break;
+        case 'touch':
+            // Implement file creation logic
+            outputElement.textContent += `touch: not implemented yet\n`;
+            break;
+        case 'echo':
+            // Implement echoing text to output
+            outputElement.textContent += command.substring(5) + '\n';
             break;
         default:
             if (command.startsWith('calc ')) {
