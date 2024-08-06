@@ -40,7 +40,7 @@ function handleCommand(command) {
     case 'software-update':
       outputElement.textContent += 'Searching for updates.....\n';
       setTimeout(() => {
-        outputElement.textContent += 'Last update: 06.08.2024\nVersion 1.3:\n-added echo and made some changes to neofetch command.\n\n';
+        outputElement.textContent += 'Last update: 06.08.2024\nVersion 1.3:\n-added echo and made some changes on the neofetch command\n\n';
       }, 3000);
       break;
     case 'help':
@@ -63,7 +63,11 @@ function handleCommand(command) {
       outputElement.textContent += 'documents downloads music pictures public videos\n';
       break;
     case 'echo':
-      outputElement.textContent += command.substring(5) + '\n';
+      if (command.length > 4) {
+        outputElement.textContent += command.substring(5) + '\n';
+      } else {
+        outputElement.textContent += 'Usage: echo <text>\n';
+      }
       break;
     default:
       if (command.startsWith('calc ')) {
@@ -80,3 +84,4 @@ function handleCommand(command) {
       break;
   }
 }
+
