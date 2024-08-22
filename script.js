@@ -1,6 +1,8 @@
 const outputElement = document.getElementById('output');
 const inputElement = document.getElementById('input');
+
 const welcomeMessage = "Welcome to OrbitOS Alpha!\nType \"help\" for a list of available commands.";
+
 function typeWriter(text, i = 0) {
     if (i < text.length) {
         outputElement.textContent += text.charAt(i);
@@ -10,9 +12,11 @@ function typeWriter(text, i = 0) {
         inputElement.focus();
     }
 }
+
 window.addEventListener('load', () => {
     typeWriter(welcomeMessage);
 });
+
 inputElement.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {
         const command = inputElement.value.trim();
@@ -20,6 +24,7 @@ inputElement.addEventListener('keydown', (event) => {
         inputElement.value = '';
     }
 });
+
 function handleCommand(command) {
     switch (command) {
         case 'neofetch':
@@ -47,6 +52,7 @@ Version 1.3:
 - Added echo command
 - Enhanced neofetch output
 - Improved software update functionality (beta)
+
 Updating system... Please wait.
 `;
                 setTimeout(() => {
