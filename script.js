@@ -1,6 +1,5 @@
 const outputElement = document.getElementById('output');
 const inputElement = document.getElementById('input');
-
 const welcomeMessage = "Welcome to OrbitOS Alpha!\nType \"help\" for a list of available commands.";
 
 function typeWriter(text, i = 0) {
@@ -26,10 +25,11 @@ inputElement.addEventListener('keydown', (event) => {
 });
 
 function handleCommand(command) {
-    switch (command) {
+    const [cmd, ...args] = command.split(' ');
+    switch (cmd) {
         case 'neofetch':
             outputElement.textContent += `
-OrbitOS v1.3
+OrbitOS v1.4
 -------------
 Kernel: GeminiKernel 5.0.0-mvm
 OS Type: Linux
@@ -47,21 +47,20 @@ Memory: 16384MB / 32768MB
             outputElement.textContent += 'Searching for updates.....\n';
             setTimeout(() => {
                 outputElement.textContent += `
-Last update: 06.08.2024
-Version 1.3:
-- Added echo command
-- Enhanced neofetch output
-- Improved software update functionality (beta)
+Last update: 22.08.2024
+Version 1.4:
+- Added mkdir <directory>
+- added touch <filename>
+- added cat <filename>
+- added whoami
+- added uname
+- added pwd
+- The calc command now works with multi-word expressions
+- The command parsing has been improved to separate the command and its arguments.
 
-Updating system... Please wait.
-`;
-                setTimeout(() => {
-                    outputElement.textContent += 'Update complete. System is now up to date.\n';
-                }, 3000);
-            }, 3000);
-            break;
+
         case 'help':
-            outputElement.textContent += 'Available commands:\n- neofetch\n- software-update\n- calc <expression>\n- help\n- date\n- time\n- clear\n- ls\n- echo <message>\n';
+            outputElement.textContent += 'Available commands:\n- neofetch\n- software-update\n- calc <expression>\n- help\n- date\n- time\n- clear\n- ls\n- echo <message>\n- mkdir <directory>\n- touch <filename>\n- cat <filename>\n- whoami\n- uname\n- pwd\n';
             break;
         case 'date':
             const currentDate = new Date();
@@ -79,21 +78,50 @@ Updating system... Please wait.
         case 'ls':
             outputElement.textContent += 'documents downloads music pictures public videos\n';
             break;
-        default:
-            if (command.startsWith('calc ')) {
-                try {
-                    const expression = command.substring(5);
-                    const result = eval(expression);
-                    outputElement.textContent += `Result: ${result}\n`;
-                } catch (error) {
-                    outputElement.textContent += 'Invalid expression\n';
-                }
-            } else if (command.startsWith('echo ')) {
-                const message = command.substring(5);
-                outputElement.textContent += `${message}\n`;
-            } else {
-                outputElement.textContent += `Command not found: ${command}\n`;
+        case 'calc':
+            try {
+                const expression = args.join(' ');
+                const result = eval(expression);
+                outputElement.textContent += `Result: ${result}\n`;
+            } catch (error) {
+                outputElement.textContent += 'Invalid expression\n';
             }
+            break;
+        case 'echo':
+            outputElement.textContent += `${args.join(' ')}\n`;
+            break;
+        case 'mkdir':
+            if (args.length > 0) {
+                outputElement.textContent += `Directory created: ${args[0]}\n`;
+            } else {
+                outputElement.textContent += 'Usage: mkdir <directory>\n';
+            }
+            break;
+        case 'touch':
+            if (args.length > 0) {
+                outputElement.textContent += `File created: ${args[0]}\n`;
+            } else {
+                outputElement.textContent += 'Usage: touch <filename>\n';
+            }
+            break;
+        case 'cat':
+            if (args.length > 0) {
+                outputElement.textContent += `Contents of ${args[0]}:\nThis is a sample file content.\n`;
+            } else {
+                outputElement.textContent += 'Usage: cat <filename>\n';
+            }
+            break;
+        case 'whoami':
+            outputElement.textContent += 'orbituser\n';
+            break;
+        case 'uname':
+            outputElement.textContent += 'OrbitOS\n';
+            break;
+        case 'pwd':
+            outputElement.textContent += '/home/orbituser\n';
+            break;
+        default:
+            outputElement.textContent += `Command not found: ${cmd}\n`;
             break;
     }
 }
