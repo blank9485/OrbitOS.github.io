@@ -1,7 +1,6 @@
 const outputElement = document.getElementById('output');
 const inputElement = document.getElementById('input');
 const welcomeMessage = "Welcome to OrbitOS Alpha!\nType \"help\" for a list of available commands.";
-
 function typeWriter(text, i = 0) {
     if (i < text.length) {
         outputElement.textContent += text.charAt(i);
@@ -11,11 +10,9 @@ function typeWriter(text, i = 0) {
         inputElement.focus();
     }
 }
-
 window.addEventListener('load', () => {
     typeWriter(welcomeMessage);
 });
-
 inputElement.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {
         const command = inputElement.value.trim();
@@ -23,13 +20,11 @@ inputElement.addEventListener('keydown', (event) => {
         inputElement.value = '';
     }
 });
-
 function handleCommand(command) {
-    const [cmd, ...args] = command.split(' ');
-    switch (cmd) {
+    switch (command) {
         case 'neofetch':
-            outputElement.textContent += `
-OrbitOS v1.4
+            outputElement.textContent += 
+OrbitOS v1.3
 -------------
 Kernel: GeminiKernel 5.0.0-mvm
 OS Type: Linux
@@ -41,26 +36,26 @@ WM: OrbitWM
 Terminal: OrbitTerm
 CPU: OrbitCPU @ 3.5GHz
 Memory: 16384MB / 32768MB
-\n`;
+\n;
             break;
         case 'software-update':
             outputElement.textContent += 'Searching for updates.....\n';
             setTimeout(() => {
-                outputElement.textContent += `
-Last update: 22.08.2024
-Version 1.4:
-- Added mkdir <directory>
-- added touch <filename>
-- added cat <filename>
-- added whoami
-- added uname
-- added pwd
-- The calc command now works with multi-word expressions
-- The command parsing has been improved to separate the command and its arguments.
-
-
+                outputElement.textContent += 
+Last update: 06.08.2024
+Version 1.3:
+- Added echo command
+- Enhanced neofetch output
+- Improved software update functionality (beta)
+Updating system... Please wait.
+;
+                setTimeout(() => {
+                    outputElement.textContent += 'Update complete. System is now up to date.\n';
+                }, 3000);
+            }, 3000);
+            break;
         case 'help':
-            outputElement.textContent += 'Available commands:\n- neofetch\n- software-update\n- calc <expression>\n- help\n- date\n- time\n- clear\n- ls\n- echo <message>\n- mkdir <directory>\n- touch <filename>\n- cat <filename>\n- whoami\n- uname\n- pwd\n';
+            outputElement.textContent += 'Available commands:\n- neofetch\n- software-update\n- calc <expression>\n- help\n- date\n- time\n- clear\n- ls\n- echo <message>\n';
             break;
         case 'date':
             const currentDate = new Date();
@@ -78,50 +73,21 @@ Version 1.4:
         case 'ls':
             outputElement.textContent += 'documents downloads music pictures public videos\n';
             break;
-        case 'calc':
-            try {
-                const expression = args.join(' ');
-                const result = eval(expression);
-                outputElement.textContent += `Result: ${result}\n`;
-            } catch (error) {
-                outputElement.textContent += 'Invalid expression\n';
-            }
-            break;
-        case 'echo':
-            outputElement.textContent += `${args.join(' ')}\n`;
-            break;
-        case 'mkdir':
-            if (args.length > 0) {
-                outputElement.textContent += `Directory created: ${args[0]}\n`;
-            } else {
-                outputElement.textContent += 'Usage: mkdir <directory>\n';
-            }
-            break;
-        case 'touch':
-            if (args.length > 0) {
-                outputElement.textContent += `File created: ${args[0]}\n`;
-            } else {
-                outputElement.textContent += 'Usage: touch <filename>\n';
-            }
-            break;
-        case 'cat':
-            if (args.length > 0) {
-                outputElement.textContent += `Contents of ${args[0]}:\nThis is a sample file content.\n`;
-            } else {
-                outputElement.textContent += 'Usage: cat <filename>\n';
-            }
-            break;
-        case 'whoami':
-            outputElement.textContent += 'orbituser\n';
-            break;
-        case 'uname':
-            outputElement.textContent += 'OrbitOS\n';
-            break;
-        case 'pwd':
-            outputElement.textContent += '/home/orbituser\n';
-            break;
         default:
-            outputElement.textContent += `Command not found: ${cmd}\n`;
+            if (command.startsWith('calc ')) {
+                try {
+                    const expression = command.substring(5);
+                    const result = eval(expression);
+                    outputElement.textContent += Result: ${result}\n;
+                } catch (error) {
+                    outputElement.textContent += 'Invalid expression\n';
+                }
+            } else if (command.startsWith('echo ')) {
+                const message = command.substring(5);
+                outputElement.textContent += ${message}\n;
+            } else {
+                outputElement.textContent += Command not found: ${command}\n;
+            }
             break;
     }
 }
