@@ -23,7 +23,7 @@ inputElement.addEventListener('keydown', (event) => {
 function handleCommand(command) {
     switch (command) {
         case 'neofetch':
-            outputElement.textContent += 
+            outputElement.textContent += `
 OrbitOS v1.3
 -------------
 Kernel: GeminiKernel 5.0.0-mvm
@@ -36,19 +36,19 @@ WM: OrbitWM
 Terminal: OrbitTerm
 CPU: OrbitCPU @ 3.5GHz
 Memory: 16384MB / 32768MB
-\n;
+\n`;
             break;
         case 'software-update':
             outputElement.textContent += 'Searching for updates.....\n';
             setTimeout(() => {
-                outputElement.textContent += 
+                outputElement.textContent += `
 Last update: 06.08.2024
 Version 1.3:
 - Added echo command
 - Enhanced neofetch output
 - Improved software update functionality (beta)
 Updating system... Please wait.
-;
+`;
                 setTimeout(() => {
                     outputElement.textContent += 'Update complete. System is now up to date.\n';
                 }, 3000);
@@ -78,15 +78,15 @@ Updating system... Please wait.
                 try {
                     const expression = command.substring(5);
                     const result = eval(expression);
-                    outputElement.textContent += Result: ${result}\n;
+                    outputElement.textContent += `Result: ${result}\n`;
                 } catch (error) {
                     outputElement.textContent += 'Invalid expression\n';
                 }
             } else if (command.startsWith('echo ')) {
                 const message = command.substring(5);
-                outputElement.textContent += ${message}\n;
+                outputElement.textContent += `${message}\n`;
             } else {
-                outputElement.textContent += Command not found: ${command}\n;
+                outputElement.textContent += `Command not found: ${command}\n`;
             }
             break;
     }
