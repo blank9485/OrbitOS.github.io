@@ -29,7 +29,7 @@ function handleCommand(command) {
     switch (command) {
         case 'neofetch':
             outputElement.textContent += `
-OrbitOS v1.3
+OrbitOS v1.4
 -------------
 Kernel: GeminiKernel 5.0.0-mvm
 OS Type: Linux
@@ -47,16 +47,15 @@ Memory: 16384MB / 32768MB
             outputElement.textContent += 'Searching for updates.....\n';
             setTimeout(() => {
                 outputElement.textContent += `
-Last update: 06.08.2024
-Version 1.3:
-- Added echo command
-- Enhanced neofetch output
-- Improved software update functionality (beta)
+Last update: 23.08.2024
+Version 1.4:
+- fixed ls command outpot
+- improved software update functionality
 
-Updating system... Please wait.
+Checking for updates... Please wait.
 `;
                 setTimeout(() => {
-                    outputElement.textContent += 'Update complete. System is now up to date.\n';
+                    outputElement.textContent += 'Everything looks good! System is up to date.\n';
                 }, 3000);
             }, 3000);
             break;
@@ -77,7 +76,7 @@ Updating system... Please wait.
             outputElement.textContent = '';
             break;
         case 'ls':
-            outputElement.textContent += 'documents downloads music pictures public videos\n';
+            outputElement.textContent += 'documents, downloads, music, pictures, videos\n';
             break;
         default:
             if (command.startsWith('calc ')) {
