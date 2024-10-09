@@ -1,7 +1,7 @@
 body {
-    font-family: 'Roboto', sans-serif; 
-    background: #f0f0f0;
-    color: #333;
+    font-family: 'Space Mono', monospace;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    color: #e94560;
     margin: 0;
     display: flex;
     justify-content: center;
@@ -10,44 +10,82 @@ body {
 }
 
 #terminal {
-    background: rgba(255, 255, 255, 0.8);
-    padding: 1rem;
-    border-radius: 0.5rem;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Added back the box shadow */
+    background: rgba(0, 24, 57, 0.8);
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(233, 69, 96, 0.2);
     width: 90%;
-    max-width: 350px;
+    max-width: 600px;
+    backdrop-filter: blur(10px);
 }
 
 #output {
     white-space: pre-wrap;
     font-size: 0.9rem;
-    overflow: hidden; /* Hide the text initially */
-    border-right: 0.15em solid transparent; /* Add a blinking cursor */
-    /* Add the typing animation using CSS */
+    margin-bottom: 1rem;
+    overflow: hidden;
+    border-right: 0.15em solid #e94560;
     animation: 
-        typing 2s steps(40, end) forwards, /* Step-based typing animation */
-        blink-caret 0.75s step-end infinite; /* Blinking cursor animation */
+        typing 3s steps(40, end),
+        blink-caret 0.75s step-end infinite;
 }
 
-/* Keyframes for typing animation */
 @keyframes typing {
     from { width: 0 }
     to { width: 100% }
 }
 
-/* Keyframes for blinking cursor animation */
 @keyframes blink-caret {
     from, to { border-color: transparent }
-    50% { border-color: #333 }
+    50% { border-color: #e94560 }
 }
-
 
 #input {
     width: 100%;
-    background: none;
+    background: rgba(233, 69, 96, 0.1);
     border: none;
-    color: #333;
+    border-bottom: 2px solid #e94560;
+    color: #e94560;
+    font-family: 'Space Mono', monospace;
     font-size: 0.9rem;
-    padding: 0.25rem;
-
+    padding: 0.5rem;
+    transition: all 0.3s ease;
 }
+
+#input:focus {
+    outline: none;
+    background: rgba(233, 69, 96, 0.2);
+    box-shadow: 0 0 10px rgba(233, 69, 96, 0.3);
+}
+
+#prompt {
+    color: #0f3460;
+    font-weight: bold;
+    margin-right: 0.5rem;
+}
+
+.command {
+    color: #16c79a;
+    font-weight: bold;
+}
+
+.error {
+    color: #f05454;
+}
+
+.success {
+    color: #16c79a;
+}
+
+/* Add some space-themed decorations */
+.star {
+    position: fixed;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle 1s infinite alternate;
+}
+
+@keyframes twinkle {
+    0% { opacity: 0.2; }
+    100% { opacity: 1; }
+        }
