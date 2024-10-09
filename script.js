@@ -1,19 +1,34 @@
 const outputElement = document.getElementById('output');
 const inputElement = document.getElementById('input');
+const terminalElement = document.getElementById('terminal');
 
-const welcomeMessage = "Welcome to OrbitOS Alpha!\nType \"help\" for a list of available commands.";
+const welcomeMessage = "Welcome to OrbitOS Beta 2.0!\n Type \"help\" for navigation.";
+
+function createStars() {
+    for (let i = 0; i < 50; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        star.style.width = `${Math.random() * 3}px`;
+        star.style.height = star.style.width;
+        star.style.left = `${Math.random() * 100}%`;
+        star.style.top = `${Math.random() * 100}%`;
+        document.body.appendChild(star);
+    }
+}
 
 function typeWriter(text, i = 0) {
     if (i < text.length) {
-        outputElement.textContent += text.charAt(i);
+        outputElement.innerHTML += text.charAt(i);
         i++;
-        setTimeout(() => typeWriter(text, i), 50); 
+        setTimeout(() => typeWriter(text, i), 50);
     } else {
+        outputElement.innerHTML += '<br><span id="prompt">orbit@user:~$</span> ';
         inputElement.focus();
     }
 }
 
 window.addEventListener('load', () => {
+    createStars();
     typeWriter(welcomeMessage);
 });
 
@@ -26,73 +41,126 @@ inputElement.addEventListener('keydown', (event) => {
 });
 
 function handleCommand(command) {
-    switch (command) {
+    outputElement.innerHTML += `<span class="command">${command}</span><br>`;
+    
+    switch (command.toLowerCase()) {
         case 'neofetch':
-            outputElement.textContent += `
-OrbitOS v1.4
--------------
-Kernel: GeminiKernel 5.0.0-mvm
-OS Type: Linux
-Host: localhost
-Shell: GeminiShell v1.0
-Resolution: 1920x1080
-DE: OrbitDE
-WM: OrbitWM
-Terminal: OrbitTerm
-CPU: OrbitCPU @ 3.5GHz
-Memory: 16384MB / 32768MB
-\n`;
+            displayNeofetch();
             break;
         case 'software-update':
-            outputElement.textContent += 'Searching for updates.....\n';
-            setTimeout(() => {
-                outputElement.textContent += `
-Last update: 23.08.2024
-Version 1.4:
-- fixed ls command outpot
-- improved software update functionality
-
-Checking for updates... Please wait.
-`;
-                setTimeout(() => {
-                    outputElement.textContent += 'Everything looks good! System is up to date.\n';
-                }, 3000);
-            }, 3000);
+            simulateSoftwareUpdate();
             break;
         case 'help':
-            outputElement.textContent += 'Available commands:\n- neofetch\n- software-update\n- calc <expression>\n- help\n- date\n- time\n- clear\n- ls\n- echo <message>\n';
+            displayHelp();
             break;
         case 'date':
-            const currentDate = new Date();
-            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            outputElement.textContent += currentDate.toLocaleDateString('en-US', options) + '\n';
+            displayDate();
             break;
         case 'time':
-            const currentTime = new Date();
-            const timeOptions = { hour: 'numeric', minute: 'numeric', second: 'numeric' };
-            outputElement.textContent += currentTime.toLocaleTimeString('en-US', timeOptions) + '\n';
+            displayTime();
             break;
         case 'clear':
-            outputElement.textContent = '';
+            clearTerminal();
             break;
         case 'ls':
-            outputElement.textContent += 'documents, downloads, music, pictures, videos\n';
+            listDirectory();
             break;
         default:
             if (command.startsWith('calc ')) {
-                try {
-                    const expression = command.substring(5);
-                    const result = eval(expression);
-                    outputElement.textContent += `Result: ${result}\n`;
-                } catch (error) {
-                    outputElement.textContent += 'Invalid expression\n';
-                }
+                calculateExpression(command.substring(5));
             } else if (command.startsWith('echo ')) {
-                const message = command.substring(5);
-                outputElement.textContent += `${message}\n`;
+                echoMessage(command.substring(5));
             } else {
-                outputElement.textContent += `Command not found: ${command}\n`;
+                outputElement.innerHTML += `<span class="error">Command not found: ${command}</span><br>`;
             }
             break;
     }
+    
+    outputElement.innerHTML += '<span id="prompt">orbit@user:~$</span> ';
+    inputElement.focus();
 }
+
+function displayNeofetch() {
+    const neofetchOutput = `
+    <span class="success">       .:/+oosso+/:.       </span>  OrbitOS v2.0 Beta
+    <span class="success">    -+ydddddddddddddy+-    </span>  ----------------
+    <span class="success">  /yddddddddddddddddddy/   </span>  Kernel: CosmosKernel 6.1.0
+    <span class="success"> oddddddddddddddddddddddo  </span>  OS Type: Linux
+    <span class="success">+dddddddddddddddddddddddd+ </span>  Host: starship_enterprise
+    <span class="success">dddddddddddddddddddddddddd </span>  Shell: NovaShell v2.1
+    <span class="success">dddddddddddddddddddddddddd </span>  Resolution: 3840x2160
+    <span class="success">+dddddddddddddddddddddddd+ </span>  DE: OrbitDE 2.0
+    <span class="success"> oddddddddddddddddddddddo  </span>  WM: GalaxyWM
+    <span class="success">  /yddddddddddddddddddy/   </span>  Terminal: QuantumTerm
+    <span class="success">    -+ydddddddddddddy+-    </span>  CPU: StarDrive @ 5.0GHz
+    <span class="success">       .:/+oosso+/:.       </span>  Memory: 32768MB / 65536MB
+    `;
+    outputElement.innerHTML += neofetchOutput + '<br>';
+}
+
+function simulateSoftwareUpdate() {
+    outputElement.innerHTML += 'Initiating software update sequence...<br>';
+    setTimeout(() => {
+        outputElement.innerHTML += `
+Last update: 09.10.2024
+Version 2.0 Beta:
+- Improved UI with space theme
+- Enhanced command processing
+- Added new 'neofetch' design
+- Optimized performance
+
+Checking for updates... Please wait.<br>`;
+        setTimeout(() => {
+            outputElement.innerHTML += '<span class="success">System is at the frontier of innovation. No updates available.</span><br>';
+        }, 3000);
+    }, 2000);
+}
+
+function displayHelp() {
+    const helpText = `
+Available commands:
+- neofetch : Display system information
+- software-update : Check for system updates
+- calc <expression> : Perform calculations
+- help : Display this help message
+- date : Show current date
+- time : Show current time
+- clear : Clear the terminal
+- ls : List directory contents
+- echo <message> : Display a message
+`;
+    outputElement.innerHTML += helpText;
+}
+
+function displayDate() {
+    const currentDate = new Date();
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    outputElement.innerHTML += currentDate.toLocaleDateString('en-US', options) + '<br>';
+}
+
+function displayTime() {
+    const currentTime = new Date();
+    const timeOptions = { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true };
+    outputElement.innerHTML += currentTime.toLocaleTimeString('en-US', timeOptions) + '<br>';
+}
+
+function clearTerminal() {
+    outputElement.innerHTML = '';
+}
+
+function listDirectory() {
+    outputElement.innerHTML += 'documents  downloads  music  pictures  videos  quantum_data<br>';
+}
+
+function calculateExpression(expression) {
+    try {
+        const result = eval(expression);
+        outputElement.innerHTML += `<span class="success">Result: ${result}</span><br>`;
+    } catch (error) {
+        outputElement.innerHTML += '<span class="error">Invalid expression</span><br>';
+    }
+}
+
+function echoMessage(message) {
+    outputElement.innerHTML += `${message}<br>`;
+    }
