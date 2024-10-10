@@ -87,7 +87,7 @@ function displayNeofetch() {
     <span class="success">  /yddddddddddddddddddy/   </span>  Kernel: CosmosKernel 6.1.0
     <span class="success"> oddddddddddddddddddddddo  </span>  OS Type: Linux
     <span class="success">+dddddddddddddddddddddddd+ </span>  Host: starship_enterprise
-    <span class="success">dddddddddddddddddddddddddd </span>  Shell: NovaShell v2.1
+    <span class="success">dddddddddddddddddddddddddd </span>  Shell: NovaShell v2.2
     <span class="success">dddddddddddddddddddddddddd </span>  Resolution: 3840x2160
     <span class="success">+dddddddddddddddddddddddd+ </span>  DE: OrbitDE 2.0
     <span class="success"> oddddddddddddddddddddddo  </span>  WM: GalaxyWM
@@ -111,7 +111,7 @@ Version 2.0 Beta:
 
 Checking for updates... Please wait.<br>`;
         setTimeout(() => {
-            outputElement.innerHTML += '<span class="success">System is at the frontier of innovation. No updates available.</span><br>';
+            outputElement.innerHTML += '<span class="success"OrbitOS 2.0 upgrade: OrbitOS 2 brings a new layout. more cleaner, modern. 💫 .</span><br>';
         }, 3000);
     }, 2000);
 }
