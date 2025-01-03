@@ -1,16 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OrbitOS</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NeoOS</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-    <div id="terminal">
-        <pre id="output"></pre> 
-        <input type="text" id="input" placeholder="Type a command...">
+  <div id="boot-screen">booting up...</div>
+  
+  <div id="os-screen">
+    <div id="status-bar">
+      <span id="time"></span>
+      <span id="date"></span>
     </div>
-    <script src="script.js"></script> </body>
+    
+    <div id="home-screen">
+      <div class="app-grid">
+        <div class="app" onclick="openApp('calculator')">📟 calculator</div>
+        <div class="app" onclick="openApp('calendar')">📅 calendar</div>
+        <div class="app" onclick="openApp('settings')">⚙️ settings</div>
+        <div class="app" onclick="openApp('notes')">📝 notes</div>
+      </div>
+      
+      <div id="dock">
+        <div class="dock-app" onclick="openApp('calculator')">📟</div>
+        <div class="dock-app" onclick="openApp('calendar')">📅</div>
+      </div>
+    </div>
+    
+    <div id="app-window">
+      <button id="close-app" onclick="closeApp()">x</button>
+      <div id="app-content"></div>
+    </div>
+  </div>
+  
+  <script src="scripts.js"></script>
+</body>
 </html>
