@@ -1,166 +1,129 @@
-const outputElement = document.getElementById('output');
-const inputElement = document.getElementById('input');
-const terminalElement = document.getElementById('terminal');
-
-const welcomeMessage = "Welcome to OrbitOS Beta 2.0!\n Type \"help\" for navigation.";
-
-function createStars() {
-    for (let i = 0; i < 50; i++) {
-        const star = document.createElement('div');
-        star.className = 'star';
-        star.style.width = `${Math.random() * 3}px`;
-        star.style.height = star.style.width;
-        star.style.left = `${Math.random() * 100}%`;
-        star.style.top = `${Math.random() * 100}%`;
-        document.body.appendChild(star);
-    }
+/* global styles */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+  background-color: #000;
 }
 
-function typeWriter(text, i = 0) {
-    if (i < text.length) {
-        outputElement.innerHTML += text.charAt(i);
-        i++;
-        setTimeout(() => typeWriter(text, i), 50);
-    } else {
-        outputElement.innerHTML += '<br><span id="prompt">orbit@user:~$</span> ';
-        inputElement.focus();
-    }
+#boot-screen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: black;
+  color: lime;
+  width: 100vw;
+  height: 100vh;
+  font-size: 2rem;
+  animation: fadeOut 2s forwards 3s;
 }
 
-window.addEventListener('load', () => {
-    createStars();
-    typeWriter(welcomeMessage);
-});
-
-inputElement.addEventListener('keydown', (event) => {
-    if (event.key === 'Enter') {
-        const command = inputElement.value.trim();
-        handleCommand(command);
-        inputElement.value = '';
-    }
-});
-
-function handleCommand(command) {
-    outputElement.innerHTML += `<span class="command">${command}</span><br>`;
-    
-    switch (command.toLowerCase()) {
-        case 'neofetch':
-            displayNeofetch();
-            break;
-        case 'software-update':
-            simulateSoftwareUpdate();
-            break;
-        case 'help':
-            displayHelp();
-            break;
-        case 'date':
-            displayDate();
-            break;
-        case 'time':
-            displayTime();
-            break;
-        case 'clear':
-            clearTerminal();
-            break;
-        case 'ls':
-            listDirectory();
-            break;
-        default:
-            if (command.startsWith('calc ')) {
-                calculateExpression(command.substring(5));
-            } else if (command.startsWith('echo ')) {
-                echoMessage(command.substring(5));
-            } else {
-                outputElement.innerHTML += `<span class="error">Command not found: ${command}</span><br>`;
-            }
-            break;
-    }
-    
-    outputElement.innerHTML += '<span id="prompt">orbit@user:~$</span> ';
-    inputElement.focus();
+#os-screen {
+  display: none;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  background: url('wallpaper.jpg') no-repeat center center / cover;
 }
 
-function displayNeofetch() {
-    const neofetchOutput = `
-    <span class="success">       .:/+oosso+/:.       </span>  OrbitOS v2.0 Beta
-    <span class="success">    -+ydddddddddddddy+-    </span>  ----------------
-    <span class="success">  /yddddddddddddddddddy/   </span>  Kernel: CosmosKernel 6.1.0
-    <span class="success"> oddddddddddddddddddddddo  </span>  OS Type: Linux
-    <span class="success">+dddddddddddddddddddddddd+ </span>  Host: starship_enterprise
-    <span class="success">dddddddddddddddddddddddddd </span>  Shell: NovaShell v2.2
-    <span class="success">dddddddddddddddddddddddddd </span>  Resolution: 3840x2160
-    <span class="success">+dddddddddddddddddddddddd+ </span>  DE: OrbitDE 2.0
-    <span class="success"> oddddddddddddddddddddddo  </span>  WM: GalaxyWM
-    <span class="success">  /yddddddddddddddddddy/   </span>  Terminal: QuantumTerm
-    <span class="success">    -+ydddddddddddddy+-    </span>  CPU: StarDrive @ 5.0GHz
-    <span class="success">       .:/+oosso+/:.       </span>  Memory: 32768MB / 65536MB
-    `;
-    outputElement.innerHTML += neofetchOutput + '<br>';
+#status-bar {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  font-size: 1.2rem;
 }
 
-function simulateSoftwareUpdate() {
-    outputElement.innerHTML += 'Initiating software update sequence...<br>';
-    setTimeout(() => {
-        outputElement.innerHTML += `
-Last update: 09.10.2024
-Version 2.0 Beta:
-- Improved UI with space theme
-- Enhanced command processing
-- Added new 'neofetch' design
-- Optimized performance
-
-Checking for updates... Please wait.<br>`;
-        setTimeout(() => {
-            outputElement.innerHTML += '<span class="success"OrbitOS 2.0 upgrade: OrbitOS 2 brings a new layout. more cleaner, modern. 💫 .</span><br>';
-        }, 3000);
-    }, 2000);
+/* home screen layout */
+#home-screen {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 20px;
 }
 
-function displayHelp() {
-    const helpText = `
-Available commands:
-- neofetch : Display system information
-- software-update : Check for system updates
-- calc <expression> : Perform calculations
-- help : Display this help message
-- date : Show current date
-- time : Show current time
-- clear : Clear the terminal
-- ls : List directory contents
-- echo <message> : Display a message
-`;
-    outputElement.innerHTML += helpText;
+.app-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  padding: 20px;
+  justify-items: center;
 }
 
-function displayDate() {
-    const currentDate = new Date();
-    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    outputElement.innerHTML += currentDate.toLocaleDateString('en-US', options) + '<br>';
+.app {
+  background: white;
+  padding: 20px;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: transform 0.3s;
 }
 
-function displayTime() {
-    const currentTime = new Date();
-    const timeOptions = { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true };
-    outputElement.innerHTML += currentTime.toLocaleTimeString('en-US', timeOptions) + '<br>';
+.app:hover {
+  transform: scale(1.1);
 }
 
-function clearTerminal() {
-    outputElement.innerHTML = '';
+#dock {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.6);
 }
 
-function listDirectory() {
-    outputElement.innerHTML += 'documents  downloads  music  pictures  videos  quantum_data<br>';
+.dock-app {
+  width: 60px;
+  height: 60px;
+  background: white;
+  text-align: center;
+  line-height: 60px;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
-function calculateExpression(expression) {
-    try {
-        const result = eval(expression);
-        outputElement.innerHTML += `<span class="success">Result: ${result}</span><br>`;
-    } catch (error) {
-        outputElement.innerHTML += '<span class="error">Invalid expression</span><br>';
-    }
+.dock-app:hover {
+  transform: scale(1.2);
 }
 
-function echoMessage(message) {
-    outputElement.innerHTML += `${message}<br>`;
+/* app window */
+#app-window {
+  display: none;
+  position: fixed;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, -10%);
+  width: 90%;
+  max-width: 500px;
+  height: 70%;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  animation: slideIn 0.5s;
+  overflow: auto;
+}
+
+#close-app {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: red;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+#app-content {
+  padding: 20px;
+}
+
+/* responsive styles */
+@media (max-width: 768px) {
+  .app-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
     }
