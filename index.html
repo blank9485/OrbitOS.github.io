@@ -1,40 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NeoOS</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OrbitOS</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div id="boot-screen">booting up...</div>
-  
-  <div id="os-screen">
-    <div id="status-bar">
-      <span id="time"></span>
-      <span id="date"></span>
+
+<div class="terminal">
+    <div class="output" id="output">
+        <p>Welcome to OrbitOS</p>
+        <p>Type 'help' for a list of commands</p>
+        <p class="highlight">Security patch: 1 January 2025</p>
     </div>
-    
-    <div id="home-screen">
-      <div class="app-grid">
-        <div class="app" onclick="openApp('calculator')">📟 calculator</div>
-        <div class="app" onclick="openApp('calendar')">📅 calendar</div>
-        <div class="app" onclick="openApp('settings')">⚙️ settings</div>
-        <div class="app" onclick="openApp('notes')">📝 notes</div>
-      </div>
-      
-      <div id="dock">
-        <div class="dock-app" onclick="openApp('calculator')">📟</div>
-        <div class="dock-app" onclick="openApp('calendar')">📅</div>
-      </div>
+    <div class="command">
+        <span id="prompt" class="highlight"># root/orbit/home>> </span>
+        <input id="input" class="input-field" type="text" autofocus placeholder="Type a command...">
     </div>
-    
-    <div id="app-window">
-      <button id="close-app" onclick="closeApp()">x</button>
-      <div id="app-content"></div>
-    </div>
-  </div>
-  
-  <script src="scripts.js"></script>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
