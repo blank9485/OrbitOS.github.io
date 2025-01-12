@@ -1,15 +1,10 @@
-# 🚀 OrbitOS 🚀
-A terminal-inspired OS experience on the web. 💻
-![OrbitOS](https://github.com/user-attachments/assets/6e39bced-e6de-43cb-a9fc-a5646f1db446)
-This project is a web-based terminal built with HTML, CSS, and JavaScript. It features a clean, transparent design and a few basic commands for a fun, interactive experience. ✨
-Note: It's in alpha, so expect some things to be broken. 🛠️
-Features
- * Clean, transparent design 🖼️
- * Animated typing effect for the welcome message 💬
- * Basic commands:
-   * neofetch: Displays system information ℹ️
-   * software-update: software changelog 🔄
-   * help: Lists available commands ❓
+# 🌌 Welcome to OrbitOS!
 
+![1000002423](https://github.com/user-attachments/assets/54f25cc0-8015-447e-bed4-6d42b24b5698)
 
-Try it out: [here](https://blank9485.github.io/OrbitOS.github.io/) 🔗
+OrbitOS is an fake operating system built for people who love CLI. It's designed to be both beautiful and powerful, with a sleek look and a simple way to control it.
+What's New in OrbitOS 3.0?
+🚀 First Stable Release: OrbitOS 3.0 is the first stable version, packed with awesome features and a fresh new look.
+💻 Control with Commands: Do everything with easy-to-use commands.
+📊 Know Your Machine: Easily see all the details about your device with a simple command.
+🎨 Beautiful Design: OrbitOS 3.0 has a stunning dark theme inspired by the latest design trends. It's easy on the eyes and looks amazing.
