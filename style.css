@@ -1,48 +1,37 @@
+/* Global styles */
 body {
-    font-family: 'Courier New', monospace;
-    background-color: #121212;
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #212121, #121212);
     color: #e0e0e0;
     margin: 0;
     padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     overflow: hidden;
 }
 
+/* Terminal container */
 .terminal {
+    width: 100%;
+    max-width: 800px;
+    background-color: rgba(32, 34, 37, 0.95);
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
     padding: 20px;
-    height: 100vh;
-    overflow-y: auto;
-    border: 1px solid #444;
-    box-sizing: border-box;
     display: flex;
     flex-direction: column;
+    box-sizing: border-box;
 }
 
+/* Output area */
 .output {
     margin-bottom: 20px;
-}
-
-.command {
-    display: flex;
-    align-items: center;
-}
-
-.input-field {
-    background-color: #121212;
-    color: #e0e0e0;
-    border: none;
-    width: 100%;
-    padding: 5px;
+    white-space: pre-wrap;
     font-size: 16px;
-    outline: none;
-    font-family: inherit;
-}
-
-.input-field::placeholder {
-    color: #888;
-}
-
-.input-field:focus {
-    border: none;
+    line-height: 1.6;
+    color: #d1d1d1;
 }
 
 .output p {
@@ -51,5 +40,104 @@ body {
 }
 
 .highlight {
-    color: #ff4081;
+    color: #ff4081; /* Accent color for important text */
+}
+
+.output p a {
+    color: #81c784;
+    text-decoration: none;
+}
+
+.output p a:hover {
+    text-decoration: underline;
+}
+
+/* Command input field */
+.command {
+    display: flex;
+    align-items: center;
+}
+
+#prompt {
+    margin-right: 10px;
+    color: #ff4081; /* Command prompt color */
+}
+
+.input-field {
+    background-color: #121212;
+    color: #e0e0e0;
+    border: 1px solid #333;
+    padding: 8px 12px;
+    font-size: 16px;
+    border-radius: 5px;
+    width: 100%;
+    outline: none;
+    font-family: 'Roboto', sans-serif;
+}
+
+.input-field::placeholder {
+    color: #888;
+}
+
+.input-field:focus {
+    border-color: #ff4081;
+}
+
+/* Smooth transitions for input and output */
+.command, .output {
+    transition: all 0.3s ease;
+}
+
+/* Scrollbar customization */
+.terminal {
+    overflow-y: auto;
+    max-height: 80vh;
+}
+
+.terminal::-webkit-scrollbar {
+    width: 8px;
+}
+
+.terminal::-webkit-scrollbar-thumb {
+    background-color: #444;
+    border-radius: 10px;
+}
+
+.terminal::-webkit-scrollbar-thumb:hover {
+    background-color: #666;
+}
+
+/* Button-like style for command actions (e.g., help) */
+button {
+    background-color: #ff4081;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #e63a8f;
+}
+
+/* Responsive styling for mobile devices */
+@media (max-width: 600px) {
+    .terminal {
+        padding: 15px;
+    }
+
+    .input-field {
+        font-size: 14px;
+    }
+
+    .output {
+        font-size: 14px;
+    }
+
+    #prompt {
+        font-size: 14px;
+    }
 }
