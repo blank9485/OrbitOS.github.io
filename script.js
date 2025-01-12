@@ -2,69 +2,161 @@ const output = document.getElementById('output');
 const inputField = document.getElementById('input');
 const prompt = document.getElementById('prompt');
 
-function executeCommand(command) {
-    command = command.trim();
-    let response = '';
 
-    if (command === 'exit') {
-        response = 'Exiting OrbitOS...';
+let commandHistory = [];
+let historyIndex = -1;
+
+
+const config = {
+    username: 'root',
+    hostname: 'orbit',
+    version: '3.0',
+    lastBootTime: new Date().toLocaleString(),
+    systemInfo: {
+        os: 'OrbitOS',
+        version: '3.0 - stable',
+        kernel: '5.4.0-1059-gcp',
+        architecture: 'x86_64',
+        memory: '4.0GiB',
+        disk: '1.0GiB',
+        processes: 3
+    }
+};
+
+
+const commands = {
+    help: () => `
+        <p><span class="highlight">Available Commands:</span></p>
+        <p>help           - Shows this help message</p>
+        <p>clear          - Clears the terminal screen</p>
+        <p>echo [text]    - Prints the specified text</p>
+        <p>ls            - Lists files in current directory</p>
+        <p>date          - Shows current date and time</p>
+        <p>neofetch      - Displays system information</p>
+        <p>whoami        - Shows current user</p>
+        <p>history       - Shows command history</p>
+        <p>battery       - Shows battery status</p>
+        <p>software      - Shows system changelog</p>
+        <p>weather       - Shows weather information</p>
+        <p>processes     - Lists running processes</p>
+        <p>exit          - Exits OrbitOS</p>
+    `,
+
+    clear: () => {
+        output.innerHTML = '';
+        return 'Terminal cleared.';
+    },
+
+    echo: (args) => args || 'Nothing to echo.',
+
+    ls: () => `
+        <p class="highlight">Current directory contents:</p>
+        <p>📁 Documents/</p>
+        <p>📁 Downloads/</p>
+        <p>📁 Pictures/</p>
+        <p>📄 system.log</p>
+        <p>📄 readme.md</p>
+    `,
+
+    date: () => new Date().toLocaleString(),
+
+    neofetch: () => `
+        <pre class="highlight">
+                 /\\
+                /  \\
+               /    \\
+              /      \\
+             /   ◢◤   \\
+            /    ||    \\
+           /     ||     \\
+          /      ||      \\
+         /________________\\
+        </pre>
+        <p><span class="highlight">${config.systemInfo.os}</span>@${config.username}</p>
+        <p>-----------------</p>
+        <p>OS: ${config.systemInfo.os} ${config.systemInfo.version}</p>
+        <p>Kernel: ${config.systemInfo.kernel}</p>
+        <p>Architecture: ${config.systemInfo.architecture}</p>
+        <p>Memory: ${config.systemInfo.memory}</p>
+        <p>Disk: ${config.systemInfo.disk}</p>
+        <p>Uptime: ${getUptime()}</p>
+    `,
+
+    whoami: () => `<p class="highlight">${config.username}@${config.hostname}</p>`,
+
+    history: () => commandHistory.map((cmd, i) => `<p>${i + 1}. ${cmd}</p>`).join(''),
+
+    battery: () => `
+        <p>Battery Status:</p>
+        <p>Charge: 100%</p>
+        <p>Status: Not charging</p>
+        <p>Time remaining: 2d 7h</p>
+    `,
+
+    software: () => `
+        <p class="highlight">OrbitOS ${config.version} Changelog:</p>
+        <p>✨ New Material Design 3 interface</p>
+        <p>🚀 Improved performance and stability</p>
+        <p>🛡️ Enhanced security features</p>
+        <p>🎨 Custom terminal themes</p>
+        <p>🔧 Bug fixes and optimizations</p>
+    `,
+
+    weather: () => `
+        <p class="highlight">Current Weather:</p>
+        <p>Location: Terminal City</p>
+        <p>Temperature: 22°C</p>
+        <p>Condition: Clear skies</p>
+        <p>Humidity: 45%</p>
+    `,
+
+    processes: () => `
+        <p class="highlight">Running Processes:</p>
+        <p>1. system_core    (PID: 1)</p>
+        <p>2. terminal       (PID: 245)</p>
+        <p>3. user_session   (PID: 892)</p>
+    `,
+
+    exit: () => {
+        const response = 'Exiting OrbitOS...';
         setTimeout(() => {
             window.close();
         }, 1000);
-    } else if (command === 'help') {
-        response = `
-            <p>exit - Exits OrbitOS</p>
-            <p>help - Shows this message</p>
-            <p>clear - Clears the screen</p>
-            <p>echo - Prints the message</p>
-            <p>ls - Lists the files in the current directory</p>
-            <p>processes - Shows the processes</p>
-            <p>neofetch - Shows system information</p>
-            <p>system - Shows the system main directory</p>
-            <p>rm - Removes a file</p>
-            <p>battery - Shows battery percentage</p>
-            <p>software - Shows system changelog</p>
-        `;
-    } else if (command === 'clear') {
-        output.innerHTML = '';
-        response = 'Screen cleared.';
-    } else if (command === 'echo') {
-        const message = promptForMessage();
-        response = message;
-    } else if (command === 'ls') {
-        response = 'No files found.';
-    } else if (command === 'processes') {
-        response = 'Processes: [System process list placeholder]';
-    } else if (command === 'neofetch') {
-        response = `
-            <p>OrbitOS version: 3.0 - stable</p>
-            <p>Kernel version: 5.4.0-1059-gcp</p>
-            <p>Architecture: x86_64</p>            
-            <p>Total memory: 4.0GiB</p>
-            <p>Free disk space: 1.0GiB</p>
-            <p>Total processes: 3</p>
-        `;
-    } else if (command === 'system') {
-        response = window.location.href;
-    } else if (command === 'rm') {
-        response = 'No files to remove.';
-    } else if (command === 'battery') {
-        response = 'Battery: 100%\nCharging: False\nTime remaining: 2d 7h';
-    } else if (command === 'software') {
-        response = 'OrbitOS 3.0 introduces the stable version with new features and a revamped layout, offering improved performance, a better user interface, and enhanced customization options for a more seamless experience.';
-    } else if (command === 'rm os') {
-        response = 'Critical system error: No operating system detected. Restart device.';
-    } else {
-        response = `Command '${command}' not found. Type 'help' for a list of commands.`;
+        return response;
     }
+};
 
-    displayResponse(response);
+function getUptime() {
+    const now = new Date();
+    const boot = new Date(config.lastBootTime);
+    const diff = now - boot;
+    const minutes = Math.floor(diff / 60000);
+    return `${minutes} minutes`;
 }
 
-function displayResponse(response) {
-    const div = document.createElement('div');
-    div.innerHTML = `<p>${response}</p>`;
-    output.appendChild(div);
+function executeCommand(input) {
+    const [command, ...args] = input.trim().toLowerCase().split(' ');
+    const output = commands[command] 
+        ? commands[command](args.join(' '))
+        : `Command not found: ${command}. Type 'help' for available commands.`;
+    
+    if (command) {
+        commandHistory.push(input);
+        historyIndex = commandHistory.length;
+    }
+    
+    return output;
+}
+
+function displayResponse(input) {
+    const commandDiv = document.createElement('div');
+    commandDiv.innerHTML = `<p><span class="highlight">${prompt.textContent}</span> ${input}</p>`;
+    output.appendChild(commandDiv);
+
+    const responseDiv = document.createElement('div');
+    responseDiv.innerHTML = executeCommand(input);
+    output.appendChild(responseDiv);
+
     scrollToBottom();
     inputField.value = '';
 }
@@ -73,13 +165,32 @@ function scrollToBottom() {
     output.scrollTop = output.scrollHeight;
 }
 
-function promptForMessage() {
-    const message = prompt('Enter a message:');
-    return message || 'No message entered.';
-}
 
 inputField.addEventListener('keydown', function(event) {
     if (event.key === 'Enter') {
-        executeCommand(inputField.value);
+        const input = inputField.value.trim();
+        if (input) {
+            displayResponse(input);
+        }
+    } else if (event.key === 'ArrowUp') {
+        event.preventDefault();
+        if (historyIndex > 0) {
+            historyIndex--;
+            inputField.value = commandHistory[historyIndex];
+        }
+    } else if (event.key === 'ArrowDown') {
+        event.preventDefault();
+        if (historyIndex < commandHistory.length - 1) {
+            historyIndex++;
+            inputField.value = commandHistory[historyIndex];
+        } else {
+            historyIndex = commandHistory.length;
+            inputField.value = '';
+        }
     }
+});
+
+
+document.querySelector('.terminal').addEventListener('click', () => {
+    inputField.focus();
 });
