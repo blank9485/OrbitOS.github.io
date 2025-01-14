@@ -36,8 +36,8 @@ const commands = {
         <p>software      - Shows system changelog</p>
         <p>weather       - Shows weather information</p>
         <p>processes     - Lists running processes</p>
-        <p>shutdown      - Exits OrbitOS</p>
-        <p>calculator    - Calculate something</p>
+        <p>shutdown      - Shutsdown OrbitOS</p>
+        <p>calc    - Calculate something</p>
     `,
 
     clear: () => {
@@ -120,9 +120,9 @@ const commands = {
         return response;
     },
 
-    calculator: (args) => {
+    calc: (args) => {
         try {
-            if (!args) return "Usage: calculator [expression]";
+            if (!args) return "Usage: calc [expression]";
             const result = eval(args.replace(/[^-()\d/*+.]/g, ''));
             return `<p>Result: ${result}</p>`;
         } catch (error) {
