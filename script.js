@@ -40,6 +40,7 @@ const commands = {
         <p>weather       - Shows weather information</p>
         <p>processes     - Lists running processes</p>
         <p>exit          - Exits OrbitOS</p>
+        <p>calculator    - calculate something</p
     `,
 
     clear: () => {
@@ -95,11 +96,9 @@ const commands = {
 
     software: () => `
         <p class="highlight">OrbitOS ${config.version} Changelog:</p>
-        <p>✨ New Material Design 3 interface</p>
-        <p>🚀 Improved performance and stability</p>
-        <p>🛡️ Enhanced security features</p>
-        <p>🎨 Custom terminal themes</p>
-        <p>🔧 Bug fixes and optimizations</p>
+        <p>🧮 added calculator command</p>
+        <p>📴 renamed "exit" command to "shutdown"</p>
+       
     `,
 
     weather: () => `
@@ -117,13 +116,27 @@ const commands = {
         <p>3. user_session   (PID: 892)</p>
     `,
 
-    exit: () => {
-        const response = 'Exiting OrbitOS...';
+    shutdown: () => {
+        const response = 'Shutting down...';
         setTimeout(() => {
             window.close();
         }, 1000);
         return response;
-    }
+    
+    const commands = {
+    
+    
+    calculator: (args) => {
+        try {
+            if (!args) return "Usage: calculator [expression]";
+            
+            const result = eval(args.replace(/[^-()\d/*+.]/g, ''));
+            return `<p>Result: ${result}</p>`;
+        } catch (error) {
+            return `<p>Error: Invalid expression</p>`;
+        }
+    },
+    
 };
 
 function getUptime() {
