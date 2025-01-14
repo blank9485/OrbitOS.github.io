@@ -2,10 +2,8 @@ const output = document.getElementById('output');
 const inputField = document.getElementById('input');
 const prompt = document.getElementById('prompt');
 
-
 let commandHistory = [];
 let historyIndex = -1;
-
 
 const config = {
     username: 'root',
@@ -19,10 +17,9 @@ const config = {
         architecture: 'x86_64',
         memory: '4.0GiB',
         disk: '1.0GiB',
-        processes: 3
-    }
+        processes: 3,
+    },
 };
-
 
 const commands = {
     help: () => `
@@ -39,8 +36,8 @@ const commands = {
         <p>software      - Shows system changelog</p>
         <p>weather       - Shows weather information</p>
         <p>processes     - Lists running processes</p>
-        <p>exit          - Exits OrbitOS</p>
-        <p>calculator    - calculate something</p
+        <p>shutdown      - Exits OrbitOS</p>
+        <p>calculator    - Calculate something</p>
     `,
 
     clear: () => {
@@ -63,7 +60,7 @@ const commands = {
 
     neofetch: () => `
         <pre class="highlight">
-                 /\\
+          /\\
                 /  \\
                /    \\
               /      \\
@@ -96,9 +93,8 @@ const commands = {
 
     software: () => `
         <p class="highlight">OrbitOS ${config.version} Changelog:</p>
-        <p>🧮 added calculator command</p>
-        <p>📴 renamed "exit" command to "shutdown"</p>
-       
+        <p>🧮 Added calculator command</p>
+        <p>📴 Renamed "exit" command to "shutdown"</p>
     `,
 
     weather: () => `
@@ -122,21 +118,17 @@ const commands = {
             window.close();
         }, 1000);
         return response;
-    
-    const commands = {
-    
-    
+    },
+
     calculator: (args) => {
         try {
             if (!args) return "Usage: calculator [expression]";
-            
             const result = eval(args.replace(/[^-()\d/*+.]/g, ''));
             return `<p>Result: ${result}</p>`;
         } catch (error) {
             return `<p>Error: Invalid expression</p>`;
         }
     },
-    
 };
 
 function getUptime() {
@@ -149,15 +141,15 @@ function getUptime() {
 
 function executeCommand(input) {
     const [command, ...args] = input.trim().toLowerCase().split(' ');
-    const output = commands[command] 
+    const output = commands[command]
         ? commands[command](args.join(' '))
         : `Command not found: ${command}. Type 'help' for available commands.`;
-    
+
     if (command) {
         commandHistory.push(input);
         historyIndex = commandHistory.length;
     }
-    
+
     return output;
 }
 
@@ -178,8 +170,7 @@ function scrollToBottom() {
     output.scrollTop = output.scrollHeight;
 }
 
-
-inputField.addEventListener('keydown', function(event) {
+inputField.addEventListener('keydown', function (event) {
     if (event.key === 'Enter') {
         const input = inputField.value.trim();
         if (input) {
@@ -202,7 +193,6 @@ inputField.addEventListener('keydown', function(event) {
         }
     }
 });
-
 
 document.querySelector('.terminal').addEventListener('click', () => {
     inputField.focus();
